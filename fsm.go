@@ -8,10 +8,10 @@ type Machine struct {
 
 func (m *Machine) ProcessInp(inp interface{}) {
 	upcode := m.State.ProcessInp(inp)
-	m.State = m.States[m.Roadmap[m.State.id][upcode]]
+	m.State = m.States[m.Roadmap[m.State.Id][upcode]]
 }
 
 type State struct {
 	ProcessInp func(inp interface{}) string
-	id         string
+	Id         string
 }
