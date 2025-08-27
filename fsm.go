@@ -7,8 +7,14 @@ type Machine struct {
 }
 
 func (m *Machine) ProcessInp(inp interface{}) {
-	upcode := m.State.ProcessInp(inp)
-	m.State = m.States[m.Roadmap[m.State.Id][upcode]]
+	state := m.State
+	if state != nil {
+		processFun := state.ProcessInp
+		if processFun != nil {
+			upcode := processFun(inp)
+			m.State = m.States[m.Roadmap[state.Id][upcode]]
+		}
+	}
 }
 
 type State struct {
